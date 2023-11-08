@@ -24,3 +24,13 @@ model Task {
   userId      Int
   user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
+model Student {
+id        Int       @id @default(autoincrement())
+firstName String    
+lastName  String    
+email     String    @unique 
+imageUrl  String    @default("default.jpg")
+gpa       Float     
+}
+

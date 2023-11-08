@@ -14,7 +14,7 @@ module.exports = router;
 
 
 /** Sends all students */
-router.get("/students", async (req, res, next) => {
+router.get("/students", async (res, next) => {
   try {
     const students = await prisma.student.findMany();
     res.json(students);
@@ -30,7 +30,7 @@ router.get("/students/:id", async (req, res, next) => {
   try {
     const id = +req.params.id;
 
-    const student = await prisma.task.findUnique({ where: { id } });
+    const student = await prisma.student.findUnique({ where: { id } });
     res.json(student);
 
   } catch (err) {

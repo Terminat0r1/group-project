@@ -20,10 +20,3 @@ model Student {
   details    Detail[]
 }
 
-model Detail {
-  id          Int     @id @default(autoincrement())
-  description String
-  done        Boolean @default(false)
-  userId      Int
-  user        Student   @relation(fields: [userId], references: [id], onDelete: Cascade)
-}

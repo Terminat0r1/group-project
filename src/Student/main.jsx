@@ -4,10 +4,10 @@ import ReactDOM from "react-dom/client";
 import "./index.less";
 
 import { Provider } from "react-redux";
-import store from "./store";
+import store from "./store/index.js";
 
-import AuthForm from "./features/auth/AuthForm";
-import Tasks from "./features/tasks/Tasks";
+import AuthForm from "./features/auth/AuthForm.jsx";
+import Tasks from "./features/tasks/Tasks.jsx";
 import Root from "./layout/Root.jsx";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";

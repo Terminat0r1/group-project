@@ -39,7 +39,7 @@ router.get("/students/:id", async (req, res, next) => {
 });
 
 
-/** Creates new task and sends it */
+/** Add a new student */
 // router.post("/", async (req, res, next) => {
 //   try {
 //     const { description, done } = req.body;
@@ -47,11 +47,10 @@ router.get("/students/:id", async (req, res, next) => {
 //       throw new ServerError(400, "Description required.");
 //     }
 
-//     const task = await prisma.task.create({
+//     const task = await prisma.student.create({
 //       data: {
 //         description,
-//         done: done ?? false,
-//         user: { connect: { id: res.locals.user.id } },
+//         done: 
 //       },
 //     });
 //     res.json(task);

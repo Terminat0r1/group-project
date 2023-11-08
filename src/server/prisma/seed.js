@@ -1,26 +1,17 @@
 const prisma = require("../prisma");
 
-/** Seeds the database with a user and some tasks */
-const seed = async () => {
-  await prisma.user.create({
-    data: {
-      username: "foo",
-      password: "bar",
-      tasks: {
-        create: [
-          { description: "task 1" },
-          { description: "task 2" },
-          { description: "task 3" },
-        ],
+/** Seeds the database with a students */
+const student = async (numStudents = 20) => {
+  for (let i =0; i < numStudents; i++) {
+    await prisma.student.create({
+      data: {
+        firstname: `Firstname ${i}`,
+        lastname: `Lastname ${i}`,
+        email: `student${i}@example.com`,
+        gpa: Math.random() * 4,
       },
-    },
-  });
+    });
+  }
 };
 
-seed()
-  .then(async () => await prisma.$disconnect())
-  .catch(async (err) => {
-    console.error(err);
-    await prisma.$disconnect();
-    process.exit(1);
-  });
+export default student;

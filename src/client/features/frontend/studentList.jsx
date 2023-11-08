@@ -1,5 +1,5 @@
 import React from 'react';
-import student from 
+
 
 
 const StudentList = ({ students }) => {

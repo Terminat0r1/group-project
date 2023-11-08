@@ -18,6 +18,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Tasks /> },
      // { path: "/tasks", element: <Tasks /> },
+     // ^^ Change this line to match our routes
       { path: "/login", element: <AuthForm /> },
     ],
   },

@@ -10,11 +10,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model Student {
   id       Int    @id @default(autoincrement())
-  username String @unique
-  password String
-  tasks    Task[]
+  firstname String @unique
+  lastname  String
+  email String
+  img   String
+  gpa String
+  details    Detail[]
 }
 
 model Task {

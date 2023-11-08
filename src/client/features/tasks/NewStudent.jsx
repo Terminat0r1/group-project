@@ -1,9 +1,12 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useState } from "react";
+import { useCreateTaskMutation } from "./taskSlice";
 import { addStudent } from './studentsSlice'; // Import the addStudent action
+import { useDispatch } from 'react-redux';
 
-function StudentForm() {
-  const dispatch = useDispatch();
+/** Form for creating new tasks */
+export default function StudentForm() {
+  const [description, setDescription] = useState("");
+  const [createTask] = useCreateTaskMutation();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -13,7 +16,6 @@ function StudentForm() {
     // Dispatch the addStudent action to add a new student
     dispatch(addStudent({ name, age }));
   };
-
   return (
     <form onSubmit={handleSubmit}>
       <input type="text" name="name" placeholder="Name" />
@@ -22,5 +24,3 @@ function StudentForm() {
     </form>
   );
 }
-
-export default StudentForm;

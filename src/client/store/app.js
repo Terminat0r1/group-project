@@ -3,6 +3,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AllStudents from "./AllStudents"; // Import your AllStudents component
+import Navbar from "../layout/Navbar";
 
 function App() {
   return (

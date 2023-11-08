@@ -6,8 +6,8 @@ import "./index.less";
 import { Provider } from "react-redux";
 import store from "./store/index.js";
 
-import AuthForm from "./features/auth/AuthForm.jsx";
-import Tasks from "./features/tasks/Tasks.jsx";
+import AuthForm from "./features/auth/AuthForm";
+import StudentsLists from "./features/tasks/StudentsLists";
 import Root from "./layout/Root.jsx";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -16,9 +16,8 @@ const router = createBrowserRouter([
     path: "/",
     element: <Root />,
     children: [
-      { path: "/", element: <Tasks /> },
-     // { path: "/tasks", element: <Tasks /> },
-     // ^^ Change this line to match our routes
+      { path: "/", element: <StudentLists /> },
+      { path: "/students", element: <StudentsLists/> },
       { path: "/login", element: <AuthForm /> },
     ],
   },

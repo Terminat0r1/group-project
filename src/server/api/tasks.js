@@ -17,7 +17,7 @@ module.exports = router;
 router.get("/students", async (req, res, next) => {
   try {
     const students = await prisma.student.findMany();
-    
+
     res.json(students);
 
   } catch (err) {
@@ -84,16 +84,14 @@ router.put("/:id", async (req, res, next) => {
 
 
 /** Deletes single student by id */
-// router.delete("/:id", async (req, res, next) => {
-//   try {
-//     const id = +req.params.id;
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const id = +req.params.id;
 
-//     const task = await prisma.task.findUnique({ where: { id } });
-//     validateTask(res.locals.user, task);
+    await prisma.student.delete({ where: { id } });
 
-//     await prisma.task.delete({ where: { id } });
-//     res.sendStatus(204);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+    res.sendStatus(204).json({ message: 'Student has successfully been deleted' });
+  } catch (err) {
+    next(err);
+  }
+});

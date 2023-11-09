@@ -17,6 +17,7 @@ module.exports = router;
 router.get("/students", async (req, res, next) => {
   try {
     const students = await prisma.student.findMany();
+    
     res.json(students);
 
   } catch (err) {
@@ -31,6 +32,7 @@ router.get("/students/:id", async (req, res, next) => {
     const id = +req.params.id;
 
     const student = await prisma.student.findUnique({ where: { id } });
+    
     res.json(student);
 
   } catch (err) {
@@ -53,6 +55,7 @@ router.post("/", async (req, res, next) => {
         gpa,
       }
     });
+
     res.json(newStudent);
 
   } catch (err) {
@@ -61,25 +64,23 @@ router.post("/", async (req, res, next) => {
 });
 
 
+/** Updates a single student by id */
+router.put("/:id", async (req, res, next) => {
+  try {
+    const id = +req.params.id;
+    const { firstName, lastName, email, imageUrl, gpa } = req.body;
 
-/** Updates single task by id */
-// router.put("/:id", async (req, res, next) => {
-//   try {
-//     const id = +req.params.id;
-//     const { description, done } = req.body;
+    const updatedStudent = await prisma.student.update({
+      where: { id },
+      data: { firstName, lastName, email, imageUrl, gpa }
+    })
 
-//     const task = await prisma.task.findUnique({ where: { id } });
-//     validateTask(res.locals.user, task);
+    res.json(updatedStudent);
 
-//     const updatedTask = await prisma.task.update({
-//       where: { id },
-//       data: { description, done },
-//     });
-//     res.json(updatedTask);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+  } catch (err) {
+    next(err);
+  }
+});
 
 
 /** Deletes single student by id */

@@ -5,19 +5,6 @@ const router = require("express").Router();
 module.exports = router;
 
 
-
-/** Sends all tasks */
-router.get("/", async (req, res, next) => {
-  try {
-    const tasks = await prisma.task.findMany({
-      where: { userId: res.locals.user.id },
-    });
-    res.json(tasks);
-  } catch (err) {
-    next(err);
-  }
-});
-
 /** Sends all Students */
 router.get("/students", async (req, res, next) => {
   try {

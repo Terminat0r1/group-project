@@ -1,8 +1,12 @@
-// const { ServerError } = require("../errors");
+
 const prisma = require("../prisma");
 
 const router = require("express").Router();
 module.exports = router;
+
+router.get("/", (req, res) => {
+  res.send("Welcome to the API!");
+});
 
 
 /** Sends all Students */

@@ -13,8 +13,20 @@ module.exports = router;
 // });
 
 
-/** Sends all students */
-router.get("/students", async (req, res, next) => {
+/** Sends all tasks */
+router.get("/", async (req, res, next) => {
+  try {
+    const tasks = await prisma.task.findMany({
+      where: { userId: res.locals.user.id },
+    });
+    res.json(tasks);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/** Creates new task and sends it */
+router.post("/", async (req, res, next) => {
   try {
     const students = await prisma.student.findMany();
     res.json(students);
@@ -30,8 +42,8 @@ router.get("/students/:id", async (req, res, next) => {
   try {
     const id = +req.params.id;
 
-    const student = await prisma.task.findUnique({ where: { id } });
-    res.json(student);
+    const task = await prisma.task.findUnique({ where: { id } });
+    validateTask(res.locals.user, task);
 
   } catch (err) {
     next(err);
@@ -39,44 +51,11 @@ router.get("/students/:id", async (req, res, next) => {
 });
 
 
-/** Add a new student */
-// router.post("/", async (req, res, next) => {
-//   try {
-//     const { description, done } = req.body;
-//     if (!description) {
-//       throw new ServerError(400, "Description required.");
-//     }
-
-//     const task = await prisma.student.create({
-//       data: {
-//         description,
-//         done: 
-//       },
-//     });
-//     res.json(task);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
-
-
-/** Checks if task exists and belongs to given user */
-// const validateTask = (user, task) => {
-//   if (!task) {
-//     throw new ServerError(404, "Task not found.");
-//   }
-
-//   if (task.userId !== user.id) {
-//     throw new ServerError(403, "This task does not belong to you.");
-//   }
-// };
-
-
-/** Updates single student by id */
-// router.put("/students/:id", async (req, res, next) => {
-//   try {
-//     const id = +req.params.id;
-//     const { description, done } = req.body;
+/** Updates single task by id */
+router.put("/:id", async (req, res, next) => {
+  try {
+    const id = +req.params.id;
+    const { description, done } = req.body;
 
 //     const task = await prisma.task.findUnique({ where: { id } });
 //     validateTask(res.locals.user, task);
@@ -100,9 +79,9 @@ router.get("/students/:id", async (req, res, next) => {
 //     const task = await prisma.task.findUnique({ where: { id } });
 //     validateTask(res.locals.user, task);
 
-//     await prisma.task.delete({ where: { id } });
-//     res.sendStatus(204);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+    await prisma.task.delete({ where: { id } });
+    res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+});

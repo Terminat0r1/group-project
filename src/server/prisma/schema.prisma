@@ -10,15 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-model Task {
-  id          Int     @id @default(autoincrement())
-  description String
-  done        Boolean @default(false)
-  userId      Int
-  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
 model Student {
 id        Int       @id @default(autoincrement())
 firstName String    

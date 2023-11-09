@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 const students = require('../../../server/prisma/seed');
-
+import { useParams } from 'react-router-dom';
 
 const StudentDetail = ({ student }) => {
   const { fullName, email, image, gpa } = student;
   const [showMore, setShowMore] = useState(false);
+  const { studentId } = useParams();
 
   const toggleShowMore = () => {
     setShowMore(!showMore);

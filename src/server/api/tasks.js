@@ -38,17 +38,27 @@ router.get("/students/:id", async (req, res, next) => {
   }
 });
 
+
 /** Creates new student */
-// router.post("/", async (req, res, next) => {
-//   try {
-//     const students = await prisma.student.findMany();
-//     res.json(students);
+router.post("/", async (req, res, next) => {
+  try {
+    const { firstName, lastName, email, imageUrl, gpa } = req.body;
 
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+    const newStudent = await prisma.student.create({
+      data: {
+        firstName,
+        lastName,
+        email,
+        imageUrl,
+        gpa,
+      }
+    });
+    res.json(newStudent);
 
+  } catch (err) {
+    next(err);
+  }
+});
 
 
 

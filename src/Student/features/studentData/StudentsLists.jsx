@@ -15,6 +15,11 @@ export default function StudentsList() {
   const token = useSelector(selectToken);
   const { data: tasks, isLoading } = useGetTasksQuery();
 
+  const handleDelete = (studentId) => {
+    // Filter out the student with the specified ID
+    const updatedStudents = students.filter((student) => student.id !== studentId);
+    setStudents(updatedStudents);
+  };
   if (!token) {
     return <p>You must be logged in to see your students.</p>;
   }
@@ -28,6 +33,7 @@ export default function StudentsList() {
        {students.map((student) => (
          <li key={student.id}>
            <Link to={`/students/${student.id}`}>{student.fullName}</Link>
+           <button onClick={() => handleDelete(student.id)}>X</button>
          </li>
        ))}
      </ul>
